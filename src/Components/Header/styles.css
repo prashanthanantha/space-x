@@ -1,0 +1,17 @@
+.Header{
+    background-color: darkorange;
+    height: 150px;
+    width: 100%;
+    display: inline-block;
+    margin:0px;
+
+}
+
+.Header h1{
+    color: white;
+    text-align: center;
+    margin:0px;
+    margin-top: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 1000;
+}
