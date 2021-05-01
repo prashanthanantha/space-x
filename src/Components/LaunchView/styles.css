@@ -17,3 +17,7 @@
 .launch-view .description{
     color: darkslategray;
 }
+.launch-view img{
+    width: 100%;
+    height: 400px;
+}
