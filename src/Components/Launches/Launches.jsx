@@ -1,37 +1,43 @@
 import React from 'react';
 import { Launch } from '../Launch/Launch.jsx';
 import './styles.css';
+import axios from 'axios';
 export class LaunchesList extends React.Component{
+    state = {
+        launches:[]
+    }
+    componentDidMount = () =>{
+        this.getlaunches()
+    }
+    getlaunches = () =>{
+        axios.get('https://api.spacexdata.com/v3/launches')
+        .then((response) => {
+            this.setState(
+                {launches: response.data}
+            )
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+    allLaunchList = () =>{
+        const launchListComponents = this.state.launches.map((launch,index) =>{
+            const luanch_iamge = launch.links.flickr_images[0] ? launch.links.flickr_images[0]:'https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NXx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80';
+            return <Launch 
+            key = {'launch_'+index}
+            banner={luanch_iamge}
+            title ={launch.mission_name}
+            date = {launch.launch_date_local}
+            description={launch.details}
+            />
+        })
+
+        return launchListComponents;
+    }
     render(){
         return(
             <div className ="launches-list">
-                <Launch 
-      banner="https://farm8.staticflickr.com/7624/17170624642_e5949d160e_o.jpg"
-      title ="FalconSat"
-      date = "2006-03-25"
-      description="Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1"
-      />
-      <Launch 
-      banner="https://farm8.staticflickr.com/7624/17170624642_e5949d160e_o.jpg"
-      title ="FalconSat"
-      date = "2006-03-25"
-      description="Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1"
-      />
-      <Launch 
-      banner="https://farm8.staticflickr.com/7624/17170624642_e5949d160e_o.jpg"
-      title ="FalconSat"
-      date = "2006-03-25"
-      description="Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1
-      Ratsat was carried to orbit on the first successful orbital launch of any privately funded and developed, liquid-propelled carrier rocket, the SpaceX Falcon 1"
-      />
+                { this.allLaunchList() }
             </div>
         )
     }

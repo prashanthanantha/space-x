@@ -4,7 +4,7 @@ export class Launch extends React.Component{
     render(){
         return (
             <div className="Launch">
-                <img src={this.props.banner} />
+                <img alt="launches" src={this.props.banner} />
                 <div className="content">
                     <div className="info">
                 <h1>{this.props.title}</h1>
