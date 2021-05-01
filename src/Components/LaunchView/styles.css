@@ -1,0 +1,19 @@
+.attribute{
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.attribute h1{
+    width: 500px;
+    font-size: 24px;
+    color: darkorange;
+}
+
+.launch-view{
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 20px;
+}
+.launch-view .description{
+    color: darkslategray;
+}
